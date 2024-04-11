@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/background"
+    android:gravity="center|top"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    tools:ignore="MissingConstraints"
+    tools:layout_editor_absoluteX="1dp"
+    tools:layout_editor_absoluteY="1dp">
+
+    <LinearLayout
+        android:paddingTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:isScrollContainer="true"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/psx_logo"
+            android:layout_width="match_parent"
+            android:layout_height="195dp"
+            android:layout_marginBottom="10dp"
+            android:elevation="12dp"
+            app:srcCompat="@drawable/pops" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:fontFamily="@font/ee"
+            android:text="POPS-O-MATIC"
+            android:textAlignment="center"
+            android:textColor="@color/font"
+            android:textSize="30sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/button"
+                android:drawableLeft="@drawable/cd_icon_24dp"
+                android:fontFamily="@font/ee"
+                android:onClick="loadFile"
+                android:text="Load BIN/CUE File"
+                android:textColor="@color/button_font"
+                android:textSize="20sp"
+                app:cornerRadius="8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/ee"
+                android:gravity="center"
+                android:text="File Info"
+                android:textColor="@color/button"
+                android:textSize="20sp" />
+
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|center_vertical"
+                android:background="@color/secondary"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:shrinkColumns="1">
+
+
+                <TableRow>
+
+                    <TextView
+                        android:fontFamily="@font/ee"
+                        android:text="Title"
+                        android:textColor="@color/button"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ellipsize="marquee"
+                        android:fontFamily="@font/ee"
+                        android:gravity="end"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:singleLine="true"
+                        android:text="@string/error_loaded"
+                        android:textColor="@color/error"
+                        android:textSize="16sp"
+                        app:backgroundTint="@null" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:fontFamily="@font/ee"
+                        android:text="ID"
+                        android:textColor="@color/button"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/id"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/ee"
+                        android:gravity="end"
+                        android:text="@string/error_loaded"
+                        android:textColor="@color/error"
+                        android:textSize="16sp" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:fontFamily="@font/ee"
+                        android:text="Name"
+                        android:textColor="@color/button"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/ee"
+                        android:gravity="end"
+                        android:text="@string/error_loaded"
+                        android:textColor="@color/error"
+                        android:textSize="16sp" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:fontFamily="@font/ee"
+                        android:text="Size"
+                        android:textColor="@color/button"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/size"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/ee"
+                        android:gravity="end"
+                        android:text="@string/error_loaded"
+                        android:textColor="@color/error"
+                        android:textSize="16sp" />
+                </TableRow>
+            </TableLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="80dp"
+            android:padding="15dp">
+
+            <Button
+                android:id="@+id/nextBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:alpha=".3"
+                android:backgroundTint="@color/button"
+                android:enabled="false"
+                android:fontFamily="@font/ee"
+                android:onClick="toSettings"
+                android:text="Next"
+                android:textColor="@color/button_font"
+                android:textSize="20sp"
+                app:cornerRadius="8dp" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

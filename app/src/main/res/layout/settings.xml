@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:gravity="center|top"
+    android:orientation="vertical"
+    tools:context=".SettingsActivity"
+    tools:layout_editor_absoluteX="1dp"
+    tools:layout_editor_absoluteY="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:isScrollContainer="true"
+        android:orientation="vertical"
+        android:paddingHorizontal="28dp">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:fontFamily="@font/ee"
+            android:gravity="center"
+            android:text="Setup"
+            android:textColor="@color/button"
+            android:textSize="30dp" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/secondary"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:shrinkColumns="1"
+            android:stretchColumns="0">
+
+            <TableRow>
+                <TextView
+                    android:background="@color/background"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/ee"
+                    android:gravity="center"
+                    android:text="Summary"
+                    android:textColor="@color/button"
+                    android:textSize="16dp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_marginRight="60dp"
+                    android:fontFamily="@font/ee"
+                    android:text="Title"
+                    android:textColor="@color/button"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_weight="1"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/ee"
+                    android:gravity="end"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
+                    android:textColor="@color/success"
+                    android:textSize="16sp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:fontFamily="@font/ee"
+                    android:text="ID"
+                    android:textColor="@color/button"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/id"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/ee"
+                    android:gravity="end"
+                    android:textColor="@color/success"
+                    android:textSize="16sp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:fontFamily="@font/ee"
+                    android:text="Size"
+                    android:textColor="@color/button"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/size"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/ee"
+                    android:gravity="end"
+                    android:textColor="@color/success"
+                    android:textSize="16sp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:fontFamily="@font/ee"
+                    android:text="Directory"
+                    android:textColor="@color/button"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/dir"
+                    android:layout_weight="1"
+                    android:focusedByDefault="false"
+                    android:fontFamily="@font/ee"
+                    android:gravity="end"
+                    android:inputType="textUri"
+                    android:textColor="@color/success"
+                    android:textSize="16sp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:fontFamily="@font/ee"
+                    android:text="File"
+                    android:textColor="@color/button"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/file"
+                    android:layout_weight="1"
+                    android:focusedByDefault="false"
+                    android:fontFamily="@font/ee"
+                    android:gravity="end"
+                    android:inputType="textUri"
+                    android:textColor="@color/success"
+                    android:textSize="16sp" />
+            </TableRow>
+
+        </TableLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/secondary"
+            android:padding="10dp"
+            android:shrinkColumns="1"
+            android:stretchColumns="0">
+
+            <TableRow>
+
+                <TextView
+                    android:background="@color/background"
+                    android:fontFamily="@font/ee"
+                    android:gravity="center"
+                    android:text="VCD Processing"
+                    android:textColor="@color/button"
+                    android:textSize="16sp" />
+            </TableRow>
+
+            <TableRow>
+
+                <RadioGroup
+                    android:orientation="horizontal"
+                    tools:ignore="UselessParent">
+
+                    <RadioButton
+                        android:id="@+id/radioButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/ee"
+                        android:text="HDD"
+                        android:textColor="@color/button"
+                        android:textColorHint="@color/success"
+                        android:textColorLink="@color/success"
+                        android:textSize="14sp"
+                        app:buttonTint="@color/button" />
+
+                    <RadioButton
+                        android:id="@+id/radioButton2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="true"
+                        android:fontFamily="@font/ee"
+                        android:text="USB"
+                        android:textColor="@color/button"
+                        android:textSize="14sp"
+                        app:buttonTint="@color/button" />
+
+                    <RadioButton
+                        android:id="@+id/radioButton3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/ee"
+                        android:text="SMB"
+                        android:textColor="@color/button"
+                        android:textSize="14dp"
+                        app:buttonTint="@color/button" />
+                </RadioGroup>
+
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:background="@color/background"
+                    android:fontFamily="@font/ee"
+                    android:gravity="center"
+                    android:text="ELF Processing"
+                    android:textColor="@color/button"
+                    android:textSize="16sp" />
+            </TableRow>
+
+            <TableRow>
+
+                <RadioGroup
+                    android:orientation="horizontal"
+                    tools:ignore="UselessParent">
+
+                    <RadioButton
+                        android:id="@+id/radioButton4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:alpha=".3"
+                        android:enabled="false"
+                        android:fontFamily="@font/ee"
+                        android:text="USB HDD"
+                        android:textColor="@color/button"
+                        android:textColorHint="@color/success"
+                        android:textColorLink="@color/success"
+                        android:textSize="14sp"
+                        app:buttonTint="@color/button" />
+
+                    <RadioButton
+                        android:id="@+id/radioButton5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:alpha=".3"
+                        android:enabled="false"
+                        android:fontFamily="@font/ee"
+                        android:text="CD Disc"
+                        android:textColor="@color/button"
+                        android:textSize="14sp"
+                        app:buttonTint="@color/button" />
+                </RadioGroup>
+
+            </TableRow>
+
+            <TableRow android:layout_marginTop="10dp">
+
+                <Switch
+                    android:id="@+id/switch1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:fontFamily="@font/ee"
+                    android:singleLine="true"
+                    android:text="Add to APPS (config_apps.cfg)"
+                    android:textColor="@color/button"
+                    android:textSize="14sp"
+                    android:thumbTint="@color/button"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+            </TableRow>
+
+            <TableRow android:layout_marginTop="10dp">
+
+                <Switch
+                    android:id="@+id/switch4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/ee"
+                    android:singleLine="true"
+                    android:text="Create Folder"
+                    android:textColor="@color/button"
+                    android:textSize="14sp"
+                    android:thumbTint="@color/button"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+            </TableRow>
+
+            <TableRow android:layout_marginTop="10dp">
+
+                <Switch
+                    android:id="@+id/switch5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:alpha=".3"
+                    android:enabled="false"
+                    android:fontFamily="@font/ee"
+                    android:singleLine="true"
+                    android:text="Create VMC"
+                    android:textColor="@color/button"
+                    android:textSize="14sp"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+            </TableRow>
+
+            <TableRow android:layout_marginTop="10dp">
+
+                <Switch
+                    android:id="@+id/switch6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:alpha=".3"
+                    android:enabled="false"
+                    android:fontFamily="@font/ee"
+                    android:singleLine="true"
+                    android:text="Swap Disc Feature"
+                    android:textColor="@color/button"
+                    android:textSize="14sp"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+            </TableRow>
+
+            <TableRow android:layout_marginTop="10dp">
+
+                <Switch
+                    android:id="@+id/switch7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:alpha=".3"
+                    android:enabled="false"
+                    android:fontFamily="@font/ee"
+                    android:singleLine="true"
+                    android:text="Enable exFAT Support"
+                    android:textColor="@color/button"
+                    android:textSize="14sp"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+            </TableRow>
+
+            <TableRow android:layout_marginTop="10dp">
+
+                <Switch
+                    android:id="@+id/switch8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:alpha=".3"
+                    android:enabled="false"
+                    android:fontFamily="@font/ee"
+                    android:singleLine="true"
+                    android:text="Enable Widescreen"
+                    android:textColor="@color/button"
+                    android:textSize="14sp"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+            </TableRow>
+        </TableLayout>
+
+        <Button
+            android:id="@+id/next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="15dp"
+            android:backgroundTint="@color/button"
+            android:fontFamily="@font/ee"
+            android:onClick="testas"
+            android:text="Make VCD"
+            android:textColor="@color/button_font"
+            android:textSize="20dp"
+            app:cornerRadius="8dp" />
+    </LinearLayout>
+</ScrollView>
