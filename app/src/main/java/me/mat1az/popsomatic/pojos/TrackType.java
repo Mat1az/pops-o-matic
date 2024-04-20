@@ -1,4 +1,4 @@
-package me.mat1az.popsomatic.dto;
+package me.mat1az.popsomatic.pojos;
 
 public enum TrackType {
     DATA_TRACK((byte) 0x41), AUDIO_TRACK((byte) 0x01);

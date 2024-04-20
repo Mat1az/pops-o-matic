@@ -1,6 +1,6 @@
 package me.mat1az.popsomatic.base;
 
-import me.mat1az.popsomatic.dto.TrackCategory;
+import me.mat1az.popsomatic.pojos.TrackCategory;
 import me.mat1az.popsomatic.pojos.Track;
 
 public class TrackFactory {

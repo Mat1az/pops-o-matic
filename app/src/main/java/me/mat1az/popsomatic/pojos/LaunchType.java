@@ -1,4 +1,4 @@
-package me.mat1az.popsomatic.models;
+package me.mat1az.popsomatic.pojos;
 
 public enum LaunchType {
     SMB,USB,HDD

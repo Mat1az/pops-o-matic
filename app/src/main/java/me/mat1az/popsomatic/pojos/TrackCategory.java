@@ -1,4 +1,4 @@
-package me.mat1az.popsomatic.dto;
+package me.mat1az.popsomatic.pojos;
 
 public enum TrackCategory {
 

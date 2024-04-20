@@ -1,13 +1,13 @@
-package me.mat1az.popsomatic.models;
+package me.mat1az.popsomatic.pojos;
 
 import java.io.Serializable;
 
 import me.mat1az.popsomatic.dto.VCDHeader;
+import me.mat1az.popsomatic.pojos.LaunchType;
 
 public class PSXGame implements Serializable {
 
     private String ID, name, DBTitle, size, dir;
-    private byte[] data;
     private boolean isDB;
     private LaunchType launchType;
     private VCDHeader VCDHeader;
@@ -16,7 +16,6 @@ public class PSXGame implements Serializable {
         this.ID = ID;
         this.DBTitle = DBTitle;
         this.size = size;
-        this.data = data;
         this.VCDHeader = VCDHeader;
     }
 
@@ -58,14 +57,6 @@ public class PSXGame implements Serializable {
 
     public void setSize(String size) {
         this.size = size;
-    }
-
-    public byte[] getData() {
-        return data;
-    }
-
-    public void setData(byte[] data) {
-        this.data = data;
     }
 
     public LaunchType getLaunchType() {

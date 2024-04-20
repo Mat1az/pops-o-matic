@@ -20,12 +20,21 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import me.mat1az.popsomatic.models.PSXGame;
+import me.mat1az.popsomatic.pojos.PSXImage;
+import me.mat1az.popsomatic.pojos.Timecode;
+import me.mat1az.popsomatic.pojos.TrackMode;
+import me.mat1az.popsomatic.pojos.PSXGame;
+import me.mat1az.popsomatic.pojos.TrackInfo;
 import me.mat1az.popsomatic.services.PSXService;
 import me.mat1az.popsomatic.utils.Utils;
 
@@ -75,28 +84,53 @@ public class MainActivity extends AppCompatActivity {
      * @return Returns raw bytes of the merged binaries
      */
     @Nullable
-    public byte[] getPSXImage(Uri cue, String binDir) {
-        byte[] psxImage = null;
+    public PSXImage getPSXImage(Uri cue, String binDir) {
+        PSXImage psxImage = new PSXImage();
         try {
             InputStreamReader reader = new InputStreamReader(getContentResolver().openInputStream(cue), StandardCharsets.UTF_8);
-            Matcher m = Pattern.compile("FILE \"(.+)\" BINARY").matcher(IOUtils.toString(reader));
-            ArrayList<String> binaries = new ArrayList<>();
+            String regex = "FILE \"([^\"]+\\.bin)\" BINARY((?:(?!FILE).)*)?";
+            Matcher m = Pattern.compile(regex, Pattern.DOTALL).matcher(IOUtils.toString(reader));
+            List<TrackInfo> infoList = new ArrayList<>();
             while (m.find()) {
-                Log.println(Log.DEBUG, "dev11", "find");
+                TrackInfo trackInfo = new TrackInfo();
+                trackInfo.setBin(m.group(1).trim());
+                for (String s : m.group(2).split("\n")) {
+                    String[] line = s.trim().split(" ");
+                    if (s.contains("TRACK")) {
+                        TrackMode trackMode = TrackMode.MODE2_2352; //default
+                        if (line[2].equals("MODE2/2352")) {
+                            trackMode = TrackMode.MODE2_2352;
+                        }
+                        trackInfo.setTrack(new AbstractMap.SimpleEntry<>(line[1], trackMode));
+                    } else if (s.contains("INDEX")) {
+                        String[] timecode = line[2].split(":");
+                        Map<String, Timecode> map = new HashMap<>();
+                        map.put(line[1], new Timecode(
+                                Byte.parseByte(String.valueOf(timecode[0]), 16),
+                                Byte.parseByte(String.valueOf(timecode[1]), 16),
+                                Byte.parseByte(String.valueOf(timecode[2]), 16)));
+                        trackInfo.setIndex(map);
+                    }
+                }
+                infoList.add(trackInfo);
+            }
+            psxImage.setTrackInfo(infoList);
+            Log.println(Log.DEBUG, "dev11", String.valueOf(psxImage.getTrackInfo()));
+            List<String> binaries = new ArrayList<>();
+            while (m.find()) {
                 binaries.add(m.group(1));
             }
             if (!binaries.isEmpty() && binaries.size() > 1) {
                 //merge binaries
-                Log.println(Log.DEBUG, "dev11", "merge");
-                psxImage = psxService.mergeBinaries(binaries.toArray(new String[0]), binDir);
+                psxImage.setData(psxService.mergeBinaries(binaries.toArray(new String[0]), binDir));
             } else {
                 //getting the single binary
-                Log.println(Log.DEBUG, "dev11", "single bin");
-                psxImage = IOUtils.toByteArray(new FileInputStream(binDir + binaries.get(0)));
+                psxImage.setData(IOUtils.toByteArray(new FileInputStream(binDir + binaries.get(0))));
             }
         } catch (FileNotFoundException ignored) {
             Toast.makeText(this, "[Error] Storage access required", Toast.LENGTH_LONG).show();
         } catch (IOException ignored) {
+            Log.println(Log.DEBUG, "dev11", "IOException getPSXImage: " + ignored);
         }
         return psxImage;
     }
@@ -123,15 +157,28 @@ public class MainActivity extends AppCompatActivity {
             assert fileType != null;
             if (fileType.equals("application/octet-stream")) {
                 try {
-                    byte[] in;
+                    PSXImage psxImage = new PSXImage();
                     String[] path = resolvePath(data.getData());
-                    in = path[2].equalsIgnoreCase(".cue") ? this.getPSXImage(data.getData(), path[0]) : path[2].equalsIgnoreCase(".bin") ? IOUtils.toByteArray(Objects.requireNonNull(getContentResolver().openInputStream(data.getData()))) : null;
-                    psxGame = psxService.getPSXGame(in);
+                    if (path[2].equalsIgnoreCase(".cue")) {
+                        psxImage = this.getPSXImage(data.getData(), path[0]);
+                        Log.println(Log.DEBUG, "dev11", "0: " + path[0]);
+                        Log.println(Log.DEBUG, "dev11", "1: " + path[1]);
+                        Log.println(Log.DEBUG, "dev11", "2: " + path[2]);
+
+                    } else if (path[2].equalsIgnoreCase(".bin")) { // TODO .bin without .cue? Testing pending
+                        //IOUtils.toByteArray(Objects.requireNonNull(getContentResolver().openInputStream(data.getData())));
+                    }
+                    psxGame = psxService.getPSXGame(psxImage);
                     psxGame.setName(path[1] + path[2]);
                     psxGame.setDir(path[0]);
                     psxService.makeVCD(psxGame);
                     initComponents(psxGame);
                 } catch (Exception ignored) {
+                    Log.println(Log.DEBUG, "dev11", "onActivityResult: " + ignored);
+                    Log.println(Log.DEBUG, "dev11", "onActivityResult: " + ignored.getMessage());
+                    Log.println(Log.DEBUG, "dev11", "onActivityResult: " + ignored.getLocalizedMessage());
+                    Log.println(Log.DEBUG, "dev11", "onActivityResult: " + ignored.getCause());
+
                 }
             }
         }

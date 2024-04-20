@@ -1,6 +1,7 @@
 package me.mat1az.popsomatic.pojos;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class Track {
 
@@ -22,8 +23,7 @@ public class Track {
     @Override
     public String toString() {
         return "Track{" +
-                "SIZE=" + SIZE +
-                ", data=" + Arrays.toString(data) +
+                "data=" + Arrays.toString(data) +
                 '}';
     }
 }

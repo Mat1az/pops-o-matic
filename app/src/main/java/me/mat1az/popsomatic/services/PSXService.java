@@ -22,11 +22,12 @@ import java.nio.charset.StandardCharsets;
 import me.mat1az.popsomatic.R;
 import me.mat1az.popsomatic.base.TrackFactory;
 import me.mat1az.popsomatic.dto.TOC;
-import me.mat1az.popsomatic.dto.Timecode;
-import me.mat1az.popsomatic.dto.TrackCategory;
-import me.mat1az.popsomatic.dto.TrackType;
+import me.mat1az.popsomatic.pojos.PSXImage;
+import me.mat1az.popsomatic.pojos.Timecode;
+import me.mat1az.popsomatic.pojos.TrackCategory;
+import me.mat1az.popsomatic.pojos.TrackType;
 import me.mat1az.popsomatic.dto.VCDHeader;
-import me.mat1az.popsomatic.models.PSXGame;
+import me.mat1az.popsomatic.pojos.PSXGame;
 import me.mat1az.popsomatic.pojos.Track;
 import me.mat1az.popsomatic.utils.Utils;
 
@@ -55,13 +56,15 @@ public class PSXService {
             }
             return stream.toByteArray();
         } catch (Exception e) {
+            Log.println(Log.DEBUG, "dev11", "mergeException: " + e);
             return null;
         }
     }
 
+    // TODO Translate all PSXImage TrackInfo into TOC Tracks
     @Nullable
-
-    public PSXGame getPSXGame(byte[] in) {
+    public PSXGame getPSXGame(PSXImage psxImage) {
+        byte[] in = psxImage.getData();
         String fileSize = Utils.humanReadableByteCountBin(in.length);
         String gameID = findID(in);
         String gameDBTitle = findBDTitle(gameID);
@@ -89,10 +92,6 @@ public class PSXService {
     public boolean makeVCD(PSXGame psxGame) {
         try {
             FileOutputStream outputStream = new FileOutputStream(new File(psxGame.getDir(), (psxGame.isDB() ? psxGame.getDBTitle() : psxGame.getName()).concat(".VCD")));
-            Log.println(Log.DEBUG, "dev11", psxGame.getVCDHeader().toString());
-            Log.println(Log.DEBUG, "dev11", psxGame.getVCDHeader().getTOC().toString());
-            Log.println(Log.DEBUG, "dev11", psxGame.getVCDHeader().getData().length + "");
-            Log.println(Log.DEBUG, "dev11", psxGame.getVCDHeader().getTOC().getUniqueTracks().length + "");
             outputStream.write(psxGame.getVCDHeader().getData());
             //outputStream.write(psxGame.getData());
             //outputStream.write(new byte[1047536]);
