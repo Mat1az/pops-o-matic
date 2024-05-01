@@ -7,6 +7,7 @@
 <h4 align="center">POPS Conversion Utility for Android 6.0+</h4>
 
 <p align="center">
+  <a href="#how-it-works">How It Works</a> •
   <a href="#key-features">Key Features</a> •
   <a href="#in-progress">In Progress</a> •
   <a href="#planned">Planned</a> •
@@ -14,14 +15,13 @@
   <a href="#download">Download</a> •
 </p>
 
-
+## How It Works
+![CUE to VCD Process](https://github.com/Mat1az/pops-o-matic/assets/39683242/e435cc4d-4529-457d-9be2-107346b9bb92)
 
 ## Key Features
 
 * Automatically links and merges all binaries.
-  - Feature 1.
 * Finds its game title in a database.
-  - Feature 2.
 
 
 ## In Progress
